@@ -1,6 +1,6 @@
 .stop-generating {
 	position: absolute;
-	bottom: 128px;
+	bottom: 178px;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 1000000;

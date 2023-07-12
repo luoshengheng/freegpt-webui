@@ -41,7 +41,7 @@ class Backend_Api:
         max_retries = 3
         retries = 0
         conversation_id = request.json['conversation_id']
-        
+
         while retries < max_retries:
             try:
                 jailbreak = request.json['jailbreak']
@@ -50,8 +50,8 @@ class Backend_Api:
 
                 # Generate response
                 response = ChatCompletion.create(
-                    model=model, 
-                    stream=True, 
+                    model=model,
+                    stream=True,
                     chatId=conversation_id,
                     messages=messages
                 )
@@ -65,10 +65,10 @@ class Backend_Api:
                 retries += 1
                 if retries >= max_retries:
                     return {
-                        '_action': '_ask',
-                        'success': False,
-                        "error": f"an error occurred {str(e)}"
-                    }, 400
+                               '_action': '_ask',
+                               'success': False,
+                               "error": f"an error occurred {str(e)}"
+                           }, 400
                 time.sleep(3)  # Wait 3 second before trying again
 
 
@@ -109,10 +109,14 @@ def build_messages(jailbreak):
     # Add the prompt
     conversation += [prompt]
 
-    # Reduce conversation size to avoid API Token quantity error
-    conversation = conversation[-4:] if len(conversation) > 3 else conversation
+    messages = []
+    for prompt in conversation:
+        if prompt["content"] != '':
+            messages.append(prompt)
+    # Reduce messages size to avoid API Token quantity error
+    messages = messages[-4:] if len(messages) > 3 else messages
 
-    return conversation
+    return messages
 
 
 def fetch_search_results(query):
@@ -183,19 +187,18 @@ def response_jailbroken_failed(response):
     return False if len(response) < 4 else not (response.startswith("GPT:") or response.startswith("ACT:"))
 
 
-def set_response_language(prompt):  
+def set_response_language(prompt):
     """  
     Set the response language based on the prompt content.  
   
     :param prompt: Prompt dictionary  
     :return: String indicating the language to be used for the response  
-    """  
-    translator = Translator()  
-    max_chars = 256  
-    content_sample = prompt['content'][:max_chars]  
-    detected_language = translator.detect(content_sample).lang  
-    return f"You will respond in the language: {detected_language}. "  
-
+    """
+    translator = Translator()
+    max_chars = 256
+    content_sample = prompt['content'][:max_chars]
+    detected_language = translator.detect(content_sample).lang
+    return f"You will respond in the language: {detected_language}. "
 
 
 def getJailbreak(jailbreak):

@@ -1,6 +1,6 @@
 .hljs {
 	color: #e9e9f4;
-	background: #28293629;
+	background: black !important;
 	border-radius: var(--border-radius-1);
 	border: 1px solid var(--blur-border);
 	font-size: 15px;
