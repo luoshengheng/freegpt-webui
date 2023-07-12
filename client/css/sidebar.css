@@ -138,7 +138,7 @@
 	z-index: 100000;
 	top: 0;
 	left: 0;
-	margin: 10px;
+	margin: 10px 0 0 2px;
 	font-size: 20px;
 	cursor: pointer;
 	backdrop-filter: blur(20px);
@@ -146,8 +146,8 @@
 	background-color: var(--blur-bg);
 	border-radius: 10px;
 	border: 1px solid var(--blur-border);
-	width: 40px;
-	height: 40px;
+	width: 25px;
+	height: 25px;
 	justify-content: center;
 	align-items: center;
 	transition: 0.33s;

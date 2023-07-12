@@ -6,6 +6,18 @@
 	z-index: 1000000;
 }
 
+@media screen and (max-width: 990px) {
+	.stop-generating  {
+		bottom: 138px;
+	}
+}
+
+@media screen and (max-height: 720px) {
+	.stop-generating  {
+		bottom: 138px;
+	}
+}
+
 .stop-generating button {
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);

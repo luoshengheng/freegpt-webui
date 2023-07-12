@@ -1,11 +1,12 @@
 .field {
-	display: flex;
-	align-items: center;
-	padding: 4px;
+    display: flex;
+    align-items: center;
+    margin: 15px 0 0 0;
+    width: 100%;
 }
 
 @media screen and (max-width: 990px) {
-	.field {
-		flex-wrap: nowrap;
-	}
+    .field {
+        flex-wrap: nowrap;
+    }
 }
