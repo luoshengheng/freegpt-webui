@@ -2,7 +2,7 @@ from server.app import app
 from server.website import Website
 from server.backend import Backend_Api
 from json import load
-
+from gevent import pywsgi
 
 if __name__ == '__main__':
 
@@ -30,5 +30,7 @@ if __name__ == '__main__':
 
     # Run the Flask server
     print(f"Running on port {site_config['port']}")
-    app.run(**site_config)
+    server = pywsgi.WSGIServer((site_config['host'], site_config['port']), app)
+    server.serve_forever()
+    # app.run(**site_config)
     print(f"Closing port {site_config['port']}")
