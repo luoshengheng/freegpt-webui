@@ -1,6 +1,5 @@
 import os
 import requests
-import simplejson.errors
 import json
 
 from ...typing import sha256, Dict, get_type_hints
@@ -48,7 +47,7 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
             yield data['choices'][0]['message']['content']
         else:
             yield data.get("detail", response.text)
-    except simplejson.errors.JSONDecodeError:
+    except Exception:
         content = ""
         lines = response.text.splitlines()
         for line in lines:
