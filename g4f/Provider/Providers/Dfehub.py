@@ -1,4 +1,6 @@
 import os
+import time
+
 import requests
 import json
 
@@ -38,7 +40,6 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
         'presence_penalty': 0,
         'messages': messages,
     }
-
     response = requests.post(url + '/api/openai/v1/chat/completions',
                              headers=headers, json=data, stream=stream)
     try:
@@ -54,6 +55,8 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
             if "data:" in line and "choices" in line:
                 data = json.loads(line.replace("data:", ""))
                 content += data['choices'][0]['delta'].get("content","")
+        if content == "":
+            content = response.text
         yield content
 
 
