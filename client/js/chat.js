@@ -472,6 +472,15 @@ document.querySelector(".mobile-sidebar").addEventListener("click", (event) => {
     window.scrollTo(0, 0);
 });
 
+document.querySelector(".conversation").addEventListener("click", (event) => {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar.classList.contains("shown")) {
+        sidebar.classList.remove("shown");
+        event.target.classList.remove("rotated");
+        document.body.style.overflow = "auto";
+    }
+});
+
 const register_settings_localstorage = async () => {
     settings_ids = ["switch", "model", "jailbreak"];
     settings_elements = settings_ids.map((id) => document.getElementById(id));
