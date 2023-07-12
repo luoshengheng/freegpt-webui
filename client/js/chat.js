@@ -148,7 +148,9 @@ const ask_gpt = async (message) => {
             document.getElementById(`gpt_${window.token}`).innerHTML =
                 "An error occurred, please reload / refresh cache and try again.";
         }
-
+        if (text.length==0){
+            text = "[no response]"
+        }
         add_message(window.conversation_id, "user", message);
         add_message(window.conversation_id, "assistant", text);
 
