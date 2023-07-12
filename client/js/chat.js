@@ -458,14 +458,11 @@ window.onload = async () => {
 
 document.querySelector(".mobile-sidebar").addEventListener("click", (event) => {
     const sidebar = document.querySelector(".sidebar");
-
     if (sidebar.classList.contains("shown")) {
         sidebar.classList.remove("shown");
-        event.target.classList.remove("rotated");
         document.body.style.overflow = "auto";
     } else {
         sidebar.classList.add("shown");
-        event.target.classList.add("rotated");
         document.body.style.overflow = "hidden";
     }
 
@@ -476,7 +473,6 @@ document.querySelector(".conversation").addEventListener("click", (event) => {
     const sidebar = document.querySelector(".sidebar");
     if (sidebar.classList.contains("shown")) {
         sidebar.classList.remove("shown");
-        event.target.classList.remove("rotated");
         document.body.style.overflow = "auto";
     }
 });
