@@ -124,7 +124,7 @@ const ask_gpt = async (message) => {
 
         while (true) {
             const {value, done} = await reader.read();
-            if (done) break;
+
 
             chunk = decodeUnicode(new TextDecoder().decode(value));
 
@@ -133,7 +133,9 @@ const ask_gpt = async (message) => {
             }
 
             text += chunk;
-
+            if (text.length == 0) {
+                text = "[no answer,please retry]"
+            }
             document.getElementById(`gpt_${window.token}`).innerHTML = markdown.render(text);
             document.querySelectorAll(`code`).forEach((el) => {
                 hljs.highlightElement(el);
@@ -141,6 +143,9 @@ const ask_gpt = async (message) => {
 
             window.scrollTo(0, 0);
             message_box.scrollTo({top: message_box.scrollHeight, behavior: "auto"});
+            if (done) {
+                break;
+            }
         }
 
         // if text contains :
@@ -148,9 +153,7 @@ const ask_gpt = async (message) => {
             document.getElementById(`gpt_${window.token}`).innerHTML =
                 "An error occurred, please reload / refresh cache and try again.";
         }
-        if (text.length==0){
-            text = "[no response]"
-        }
+
         add_message(window.conversation_id, "user", message);
         add_message(window.conversation_id, "assistant", text);
 
